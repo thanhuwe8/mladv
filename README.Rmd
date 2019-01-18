@@ -14,17 +14,11 @@ knitr::opts_chunk$set(
 ```
 # mladv
 
-mladv is a r package used to clean, convert and analyze the financial data. It also provides various tools to apply machine learning to financial data.
+The package `mladv` provide tools to clean, convert and analyze the financial data. It also provides various tools to apply machine learning to financial data.
 
 ## Installation
 
-You can install the released version of mladv from [CRAN](https://CRAN.R-project.org) with:
-
-``` r
-install.packages("mladv")
-```
-
-We expect to release the package as soon as possible in CRAN. At the mean time, you can install it with devtools: 
+We expect to release the package as soon as possible in [CRAN](https://CRAN.R-project.org). At the mean time, you can install it with devtools: 
 
 ```r
 devtools::install_github("thanhuwe8/mladv")
