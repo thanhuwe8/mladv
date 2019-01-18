@@ -10,7 +10,7 @@
 #'
 #' @examples
 #' transform_data <- bar_time(SSI_data, "minute")
-bartime <-
+timebar <-
 function(data,type){
 
     type <- match.arg(type, c("minute", "hour", "day"))

@@ -3,7 +3,7 @@
 mladv
 =====
 
-The goal of mladv is to ...
+mladv is a r package used to clean, convert and analyze the financial data. It also provides various tools to apply machine learning to financial data.
 
 Installation
 ------------
@@ -14,7 +14,7 @@ You can install the released version of mladv from [CRAN](https://CRAN.R-project
 install.packages("mladv")
 ```
 
-If you want to it through devtools then
+We expect to release the package as soon as possible in CRAN. At the mean time, you can install it with devtools:
 
 ``` r
 devtools::install_github("thanhuwe8/mladv")
@@ -23,29 +23,61 @@ devtools::install_github("thanhuwe8/mladv")
 Example
 -------
 
-This is a basic example which shows you how to solve a common problem:
+First you load the data from the package
 
 ``` r
-## basic example code
+library(mladv)
+data(SSI_data)
+head(SSI_data,3)
+#>         Time Price  Size cum_volume  ppt
+#> 1 2018-12-17  29.1 22050      22050 1.37
+#> 2 2018-12-17  29.1   500      22550 0.03
+#> 3 2018-12-17  29.2  2000      24550 0.12
 ```
 
-What is special about using `README.Rmd` instead of just `README.md`? You can include R chunks like so:
+With the data\_set, we can convert the raw market data into different bars such as time bars or volume bars as examples below with `SSI_data`
 
 ``` r
-summary(cars)
-#>      speed           dist       
-#>  Min.   : 4.0   Min.   :  2.00  
-#>  1st Qu.:12.0   1st Qu.: 26.00  
-#>  Median :15.0   Median : 36.00  
-#>  Mean   :15.4   Mean   : 42.98  
-#>  3rd Qu.:19.0   3rd Qu.: 56.00  
-#>  Max.   :25.0   Max.   :120.00
+volume6000 <- volumebarr(SSI_data, 15000)
+head(volume6000)
+#>         Date  Open  High   Low Close Volume Transaction
+#> 1 2018-12-17 29.10 29.10 29.10 29.10  22050           1
+#> 2 2018-12-17 29.10 29.20 29.05 29.05  17380          15
+#> 3 2018-12-17 29.05 29.05 29.05 29.05  15330           5
+#> 4 2018-12-17 29.10 29.10 29.05 29.05  21340          10
+#> 5 2018-12-17 29.05 29.05 29.00 29.00  15150           7
+#> 6 2018-12-17 29.00 29.10 29.00 29.10  28030          12
 ```
 
-You'll still need to render `README.Rmd` regularly, to keep `README.md` up-to-date.
+``` r
+minute_bar <- timebar(SSI_data, "minute")
+head(minute_bar)
+#>         Date  Open  High   Low Close  Volume
+#> 1 2018-12-17 29.10 29.25 28.55 28.55 1604620
+#> 2 2018-12-18 27.80 28.55 27.80 28.20 1975390
+#> 3 2018-12-19 28.45 28.45 27.90 28.10 1349430
+#> 4 2018-12-20 28.05 28.50 27.95 28.15  925300
+#> 5 2018-12-21 28.00 28.00 27.85 27.85 1345330
+#> 6 2018-12-24 27.80 28.00 26.90 27.00 2087580
+```
 
-You can also embed plots, for example:
+We can still use functions from popular packages such as `quantmod` or `ggplot2` with the return data.frame
 
-<img src="man/figures/README-pressure-1.png" width="100%" />
+``` r
+library(xts)
+#> Loading required package: zoo
+#> 
+#> Attaching package: 'zoo'
+#> The following objects are masked from 'package:base':
+#> 
+#>     as.Date, as.Date.numeric
+library(quantmod)
+#> Loading required package: TTR
+#> Version 0.4-0 included new data defaults. See ?getSymbols.
+minute_plot <- xts(minute_bar[,2:6], order.by=minute_bar$Date)
+candleChart(minute_plot, theme="white", multi.col=T, name="Minute bar chart")
+```
 
-In that case, don't forget to commit and push the resulting figure files, so they display on GitHub!
+<img src="man/figures/README-quantmodplot-1.png" width="100%" />
+
+We will add more useful functions later.

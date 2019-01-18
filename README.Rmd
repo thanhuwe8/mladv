@@ -14,7 +14,7 @@ knitr::opts_chunk$set(
 ```
 # mladv
 
-The goal of mladv is to ...
+mladv is a r package used to clean, convert and analyze the financial data. It also provides various tools to apply machine learning to financial data.
 
 ## Installation
 
@@ -24,7 +24,7 @@ You can install the released version of mladv from [CRAN](https://CRAN.R-project
 install.packages("mladv")
 ```
 
-If you want to it through devtools then 
+We expect to release the package as soon as possible in CRAN. At the mean time, you can install it with devtools: 
 
 ```r
 devtools::install_github("thanhuwe8/mladv")
@@ -32,24 +32,34 @@ devtools::install_github("thanhuwe8/mladv")
 
 ## Example
 
-This is a basic example which shows you how to solve a common problem:
+First you load the data from the package
 
 ```{r example}
-## basic example code
+library(mladv)
+data(SSI_data)
+head(SSI_data,3)
 ```
 
-What is special about using `README.Rmd` instead of just `README.md`? You can include R chunks like so:
+With the data_set, we can convert the raw market data into different bars such as time bars or volume bars as examples below with `SSI_data`
 
-```{r cars}
-summary(cars)
+```{r volumebarr}
+volume6000 <- volumebarr(SSI_data, 15000)
+head(volume6000)
 ```
 
-You'll still need to render `README.Rmd` regularly, to keep `README.md` up-to-date.
-
-You can also embed plots, for example:
-
-```{r pressure, echo = FALSE}
-plot(pressure)
+```{r timebar}
+minute_bar <- timebar(SSI_data, "minute")
+head(minute_bar)
 ```
 
-In that case, don't forget to commit and push the resulting figure files, so they display on GitHub!
+We can still use functions from popular packages such as `quantmod` or `ggplot2` with the return data.frame 
+
+```{r quantmodplot}
+library(xts)
+library(quantmod)
+minute_plot <- xts(minute_bar[,2:6], order.by=minute_bar$Date)
+candleChart(minute_plot, theme="white", multi.col=T, name="Minute bar chart")
+```
+
+
+We will add more useful functions later.

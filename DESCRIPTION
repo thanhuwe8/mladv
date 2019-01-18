@@ -1,14 +1,20 @@
 Package: mladv
 Type: Package
-Title: What the Package Does (Title Case)
+Title: mladv - Machine Learning for Finance routines
+Date: 2018-01-07
 Version: 0.1.0
-Author: Who wrote it
-Maintainer: The package maintainer <yourself@somewhere.net>
-Description: More about what it does (maybe more than one line)
-    Use four spaces when indenting paragraphs within the Description.
+Author: Thanh Nguyen Minh [aut]
+Maintainer: Thanh Nguyen Minh <thanhuwe8@gmail.com>
+Description: Provides a collection of function to handle transactions data, time bars, tick bars, volumebars etc.
+Depends: R(>= 3.5.2)
+Imports: xts, quantmod, ggplot2, Rcpp
 License: What license is it under?
 Encoding: UTF-8
 LazyData: true
 RoxygenNote: 6.1.1
 URL: https://github.com/thanhuwe8/mladv
 BugReports: https://github.com/thanhuwe8/mladv/issues
+Suggests: 
+    knitr,
+    rmarkdown
+VignetteBuilder: knitr
