@@ -1,0 +1,65 @@
+---
+output: github_document
+---
+
+<!-- README.md is generated from README.Rmd. Please edit that file -->
+
+```{r setup, include = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>",
+  fig.path = "man/figures/README-",
+  out.width = "100%"
+)
+```
+# mladv
+
+mladv is a r package used to clean, convert and analyze the financial data. It also provides various tools to apply machine learning to financial data.
+
+## Installation
+
+You can install the released version of mladv from [CRAN](https://CRAN.R-project.org) with:
+
+``` r
+install.packages("mladv")
+```
+
+We expect to release the package as soon as possible in CRAN. At the mean time, you can install it with devtools: 
+
+```r
+devtools::install_github("thanhuwe8/mladv")
+```
+
+## Example
+
+First you load the data from the package
+
+```{r example}
+library(mladv)
+data(SSI_data)
+head(SSI_data,3)
+```
+
+With the data_set, we can convert the raw market data into different bars such as time bars or volume bars as examples below with `SSI_data`
+
+```{r volumebarr}
+volume6000 <- volumebarr(SSI_data, 15000)
+head(volume6000)
+```
+
+```{r timebar}
+minute_bar <- timebar(SSI_data, "minute")
+head(minute_bar)
+```
+
+We can still use functions from popular packages such as `quantmod` or `ggplot2` with the return data.frame 
+
+```{r quantmodplot}
+library(xts)
+library(quantmod)
+minute_plot <- xts(minute_bar[,2:6], order.by=minute_bar$Date)
+candleChart(minute_plot, theme="white", multi.col=T, name="Minute bar chart")
+```
+
+
+We will add more useful functions later.
