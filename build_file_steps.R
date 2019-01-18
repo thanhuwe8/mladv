@@ -43,3 +43,39 @@ SSI_data$Time <- date
 SSI_data <- SSI_data[,-1]
 
 use_data(SSI_data)
+
+use_github(protocol = "https")
+
+volumebarr <- function(data,  vol){
+    nor <- nrow(data)
+    temp_vol <- 0; Date <- NULL; Open <- NULL; High <- NULL;
+    Low <- NULL; Close <- NULL; count=0; Transaction <- NULL;
+    Volume <- NULL;
+    price_vec <- data$Price;
+    for (i in 1:nor){
+        temp_vol <- temp_vol + data[i,3]
+        count <- count + 1;
+        print(i)
+        if (temp_vol > vol){
+            start_index <- i-count+1
+            price <- price_vec[start_index:i]
+
+            Date <- append(Date, data$Time[i])
+            Open <- append(Open,price[1])
+            High <- append(High,max(price))
+            Low <- append(Low,min(price))
+            Close <- append(Close,price[length(price)])
+            Volume <- append(Volume, temp_vol)
+            Transaction <- append(Transaction, count)
+
+            temp_vol = 0
+            count = 0
+        }
+    }
+    data.frame(Date = Date, Open=Open, High=High, Low=Low,
+               Close=Close,Volume=Volume, Transaction=Transaction)
+
+
+}
+
+dump("volumebarr", file="R/volumebarr.r")

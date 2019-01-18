@@ -15,7 +15,7 @@ bartime(data, type)
 a data.frame in the form OHLC with ending date for each bar.
 }
 \description{
-Functions to transform raw transactions data into a time bar for specific timeframe.
+Function to transform raw transactions data into a time bar for a specific timeframe.
 }
 \examples{
 transform_data <- bar_time(SSI_data, "minute")
