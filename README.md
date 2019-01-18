@@ -78,6 +78,6 @@ minute_plot <- xts(minute_bar[,2:6], order.by=minute_bar$Date)
 candleChart(minute_plot, theme="white", multi.col=T, name="Minute bar chart")
 ```
 
-<img src="man/figures/README-quantmodplot-1.png" width="100%" />
+<img src="man/figures/README-fig2-1.png" width="100%" />
 
 We will add more useful functions later.

@@ -54,7 +54,7 @@ head(minute_bar)
 
 We can still use functions from popular packages such as `quantmod` or `ggplot2` with the return data.frame 
 
-```{r quantmodplot}
+```{r fig2}
 library(xts)
 library(quantmod)
 minute_plot <- xts(minute_bar[,2:6], order.by=minute_bar$Date)

@@ -80,10 +80,10 @@ volumebarr <- function(data,  vol){
 
 dump("volumebarr", file="R/volumebarr.r")
 
+# generate data for package.
 SSI_data <- read.csv("SSI.csv", stringsAsFactors = F)
-
 date <- as.POSIXct(SSI_data$Time, format="%Y-%m-%d %H:%M:%S", tz="GMT")
 SSI_data$Time <- date
-
 SSI_data <- SSI_data[,-1]
 use_data(SSI_data)
+
