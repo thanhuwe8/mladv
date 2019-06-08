@@ -10,8 +10,7 @@
 #'
 #' @examples
 #' transform_data <- bar_time(SSI_data, "minute")
-timebar <-
-function(data,type){
+timebar <- function(data,type){
 
     type <- match.arg(type, c("minute", "hour", "day"))
 
@@ -39,7 +38,7 @@ function(data,type){
     Time <- aggregate(data$Time, by=list(time_group), function(x) x[length(x)])$x
     Volume <- aggregate(data$Size, by=list(time_group), sum)$x
 
-    time_group <- data.frame(Date=Time, Open=Open, High=High,
+    time_group <- data.frame(Time=Time, Open=Open, High=High,
                              Low=Low, Close=Close, Volume=Volume)
     return(time_group)
 }

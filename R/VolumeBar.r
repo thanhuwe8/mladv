@@ -8,8 +8,7 @@
 #'
 #' @examples
 #' tranform_data <- volumebarr(SSI_data, 5000)
-volumebarr <-
-function(data,  vol){
+volumebarr <- function(data,  vol){
 
     if(!inherits(data, "data.frame"))
         stop("data should be a data.frame type")
@@ -46,7 +45,7 @@ function(data,  vol){
             count = 0
         }
     }
-    data.frame(Date = Date, Open=Open, High=High, Low=Low,
+    data.frame(Time = Date, Open=Open, High=High, Low=Low,
                Close=Close,Volume=Volume, Transaction=Transaction)
 
 

@@ -12,6 +12,7 @@ knitr::opts_chunk$set(
   out.width = "100%"
 )
 ```
+
 # mladv
 
 The package `mladv` provide tools to clean, convert and analyze the financial data. It also provides various tools to apply machine learning to financial data.
@@ -30,30 +31,25 @@ First you load the data from the package
 
 ```{r example}
 library(mladv)
-data(SSI_data)
-head(SSI_data,3)
+head(data1,3)
 ```
 
 With the data_set, we can convert the raw market data into different bars such as time bars or volume bars as examples below with `SSI_data`
 
 ```{r volumebarr}
-volume6000 <- volumebarr(SSI_data, 15000)
+volume6000 <- volumebarr(data1, 15000)
 head(volume6000)
 ```
 
 ```{r timebar}
-minute_bar <- timebar(SSI_data, "minute")
+minute_bar <- timebar(data1, "minute")
 head(minute_bar)
 ```
 
 We can still use functions from popular packages such as `quantmod` or `ggplot2` with the return data.frame 
 
-```{r fig2}
-library(xts)
-library(quantmod)
-minute_plot <- xts(minute_bar[,2:6], order.by=minute_bar$Date)
-candleChart(minute_plot, theme="white", multi.col=T, name="Minute bar chart")
-```
-
 
 We will add more useful functions later.
+
+# License
+This project is licensed under the GPL3 License

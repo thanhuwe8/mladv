@@ -3,8 +3,11 @@
 \docType{package}
 \name{mladv-package}
 \alias{mladv-package}
-\title{Package mladv}
+\title{mladv}
 \description{
+Package mladv
+}
+\details{
 The goal of the package is to provide tools to clean, convert and analyze
 financial data
 }
